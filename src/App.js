@@ -48,20 +48,18 @@ class App extends React.Component {
     });
   };
 
-  addItem = (e, todo) => {
-    e.preventdefault();
+  addTodo = (e, task) => {
     const newTodo = {
-      task: todo,
+      task: task,
       id: Date.now(),
       completed: false
     };
-    this.state({
+    this.setState({
       todo: [...this.state.todo, newTodo]
     });
   };
 
-  clearTodo = e => {
-    e.preventdefault();
+  clearTodo = () => {
     this.setState({
       todo: this.state.todo.filter(todo => !todo.completed)
     });
@@ -72,11 +70,12 @@ class App extends React.Component {
       <div className = "App">
         <div className = "header">
           <h1>To-Do:</h1>
-          <TodoForm addItem={this.addItem} />
+          <TodoForm addTodo={this.addTodo} />
         </div>        
         <TodoList
           toggleItem={this.toggleItem}
           todo={this.state.todo}
+          clearTodo={this.clearTodo}
         />
       </div>
     );
